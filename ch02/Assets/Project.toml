@@ -1,0 +1,13 @@
+name = "Assets"
+uuid = "5dc978d9-1020-4193-aecc-17c5472f43b4"
+authors = ["eeff < 33566201+eeff@users.noreply.github.com> and contributors"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

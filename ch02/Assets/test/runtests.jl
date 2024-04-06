@@ -31,4 +31,29 @@ using Test
     # <: operator, function call
     @test <:(Stock,Equity)
     @test <:(Stock,Stock)
+
+    holding = StockHolding(stock, 100)
+    # echo parametric type variation is a different type
+    @test StockHolding{Int} == typeof(holding)
+    holding = StockHolding(stock, 100.0)
+    @test StockHolding{Float64} == typeof(holding)
+    holding = StockHolding(stock, 100//3)
+    @test StockHolding{Rational{Int}} == typeof(holding)
+
+    holding = StockHolding2(stock, 100, 180.0, 18000.0)
+    @test StockHolding2{Int,Float64} == typeof(holding)
+    # cannot deduce type `P`
+    @test_throws "MethodError" StockHolding2(stock, 100, 180.0, 18000)
+
+    certificate_in_the_safe = StockHolding3(stock, 100, 180.0, 18000.0)
+    @test StockHolding3{Int,Float64} == typeof(certificate_in_the_safe)
+    @test certificate_in_the_safe isa Holding
+    @test certificate_in_the_safe isa Holding{Float64}
+    @test !(certificate_in_the_safe isa Holding{Int})
+    @test Holding{Float64} <: Holding
+    @test Holding{Int} <: Holding
+    @test StockHolding3{Int,Float64} <: Holding
+    @test StockHolding3{Int,Float64} <: Holding{Float64}
+    # not covariant
+    @test !(StockHolding3{Int,Float64} <: Holding{AbstractFloat})
 end

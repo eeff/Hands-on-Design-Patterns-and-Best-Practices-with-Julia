@@ -2,6 +2,22 @@ using SpaceWarGame
 using Suppressor
 using Test
 
+module A
+
+foo(x, y) = println("A.foo(x,y)")
+foo(x::Integer, y) = println("A.foo(Integer, y)")
+foo(x, y::Integer) = println("A.foo(x, Integer)")
+
+end
+
+module B
+
+import ..A
+
+A.foo(x::Integer, y::Integer) = println("B.foo(Integer, Integer)")
+
+end
+
 @testset "SpaceWarGame.jl" begin
     origin = Position(0, 0)
     w = Widget("asteroid", Position(0, 0), Size(10, 20))
@@ -48,4 +64,41 @@ using Test
     end
 
     clean_up_galaxy(asteroids)
+
+    s1 = Spaceship(Position(0, 0), Size(30, 5), Missile)
+    s2 = Spaceship(Position(10, 0), Size(30, 5), Laser)
+    a1 = Asteroid(Position(20, 0), Size(20, 20))
+    a2 = Asteroid(Position(0, 20), Size(20, 20))
+    @test SpaceWarGame.position(s1) == s1.position
+    @test SpaceWarGame.size(s1) == s1.size
+    @test shape(s1) == :saucer
+    @test SpaceWarGame.position(a1) == a1.position
+    @test SpaceWarGame.size(a1) == a1.size
+    @test shape(a1) == :unknown
+
+    @test collide(s1, s2)
+    @test_throws "ambiguous" collide(a1, a2)
+    @test length(detect_ambiguities(SpaceWarGame)) > 0
+
+    # resolve ambiguities
+    function SpaceWarGame.collide(a::Asteroid, b::Asteroid)
+        println("Checking collision of ateroid vs. asteroid")
+        return true
+    end
+
+    @test collide(a1, a2)
+    @test length(detect_ambiguities(SpaceWarGame)) == 0
+
+    function check_randomly(things)
+        for i in 1:5
+            two = rand(things, 2)
+            collide(two...)
+        end
+    end
+
+    check_randomly([s1, s2, a1, a2])
+
+    A.foo(1, 2)
+    @test length(detect_ambiguities(A)) == 0
+    @test length(detect_ambiguities(A, B)) == 0
 end

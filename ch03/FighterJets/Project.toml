@@ -1,0 +1,16 @@
+name = "FighterJets"
+uuid = "ea106b1d-cb54-405a-903a-b690416c0c78"
+authors = ["eeff < 33566201+eeff@users.noreply.github.com> and contributors"]
+version = "1.0.0-DEV"
+
+[deps]
+Vehicle = "457ea107-df29-4b41-9739-e753b442a278"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

@@ -1,0 +1,16 @@
+name = "SpaceWarGame"
+uuid = "8e29ed71-d3e7-4f24-b41d-4540bfc1f84f"
+authors = ["eeff < 33566201+eeff@users.noreply.github.com> and contributors"]
+version = "1.0.0-DEV"
+
+[deps]
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Suppressor = "fd094767-a336-5f1f-9728-57cf17d0bbfb"
+
+[targets]
+test = ["Test", "Suppressor"]

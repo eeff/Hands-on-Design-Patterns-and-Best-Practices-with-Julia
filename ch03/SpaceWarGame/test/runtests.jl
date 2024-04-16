@@ -101,4 +101,30 @@ end
     A.foo(1, 2)
     @test length(detect_ambiguities(A)) == 0
     @test length(detect_ambiguities(A, B)) == 0
+
+    explode([a1, a2])
+
+    # specifying abstract/concrete types in method signature
+    function tow(spaceship::Spaceship, thing::Thing)
+        return println("tow")
+    end
+
+    @test length(methods(tow)) == 1
+
+    # equivalent of parametric type
+    # overwritten previous method
+    function tow(spaceship::Spaceship, thing::T) where {T<:Thing}
+        return println("tow")
+    end
+
+    @test length(methods(tow)) == 1
+
+    group_anything(s1, s2)
+    group_anything(a1, a2)
+    group_anything(s1, a1)
+    group_anything(a1, s1)
+    group_same_thing(s1, s2)
+    group_same_thing(a1, a2)
+    @test_throws "no method" group_same_thing(s1, a1)
+    @test_throws "no method" group_same_thing(a1, s1)
 end

@@ -3,7 +3,19 @@ module SpaceWarGame
 export Position, Size, Widget
 export move_up!, move_down!, move_left!, move_right!
 export make_asteroids, shoot, triangular_formation!, random_leap!, clean_up_galaxy, fire
-export Thing, Weapon, Missile, Laser, Spaceship, Asteroid, position, size, shape, collide
+export Thing,
+    Weapon,
+    Missile,
+    Laser,
+    Spaceship,
+    Asteroid,
+    position,
+    size,
+    shape,
+    collide,
+    explode,
+    group_anything,
+    group_same_thing
 
 # Space war game
 
@@ -115,10 +127,40 @@ end
 
 shape(::Spaceship) = :saucer
 
+function Base.show(io::IO, s::Spaceship)
+    return print(
+        io,
+        "Spaceship (",
+        s.position.x,
+        ",",
+        s.position.y,
+        ") ",
+        s.size.width,
+        "x",
+        s.size.height,
+        "/",
+        s.weapon,
+    )
+end
+
 # Asteroid
 struct Asteroid <: Thing
     position::Position
     size::Size
+end
+
+function Base.show(io::IO, a::Asteroid)
+    return print(
+        io,
+        "Asteroid (",
+        a.position.x,
+        ",",
+        a.position.y,
+        ") ",
+        a.size.width,
+        "x",
+        a.size.height,
+    )
 end
 
 struct Rectangle
@@ -150,6 +192,21 @@ end
 function collide(b::Thing, a::Asteroid)
     println("Checking collision of thing vs. asteroid")
     return true
+end
+
+function explode(things::AbstractVector{T}) where {T<:Thing}
+    for t in things
+        println("Exploding thing => ", t)
+    end
+end
+
+function group_anything(a::Thing, b::Thing)
+    return println("Group ", a, " and ", b)
+end
+
+# enforce type consistency
+function group_same_thing(a::T, b::T) where {T<:Thing}
+    return println("Grouped ", a, " and ", b)
 end
 
 end

@@ -1,0 +1,10 @@
+name = "GUIFactories"
+uuid = "e1bd02b4-7325-4141-a919-22af9c2263cc"
+authors = ["eeff < 33566201+eeff@users.noreply.github.com>"]
+version = "0.1.0"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

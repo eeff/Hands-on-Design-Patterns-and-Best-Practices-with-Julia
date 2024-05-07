@@ -1,0 +1,17 @@
+name = "CommandProcessor"
+uuid = "15500a67-20ae-44e1-a762-114aa2f80dc6"
+version = "0.1.0"
+authors = ["eeff < 33566201+eeff@users.noreply.github.com>"]
+
+[sources]
+Bench = {path = "../../ch06/Bench"}
+
+[compat]
+julia = "1.12"
+
+[extras]
+Bench = "517df1bc-ee24-4b58-84e4-955ff5db0486"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Bench", "Test"]

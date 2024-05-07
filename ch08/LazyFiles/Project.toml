@@ -1,0 +1,10 @@
+name = "LazyFiles"
+uuid = "3bd5edde-2d91-4def-acf1-a560cfec8bb5"
+authors = ["eeff < 33566201+eeff@users.noreply.github.com>"]
+version = "0.1.0"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

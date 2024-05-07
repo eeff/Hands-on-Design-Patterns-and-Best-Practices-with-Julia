@@ -1,0 +1,18 @@
+name = "Barrier"
+uuid = "c9516d59-3026-41da-b512-e87c23836a8e"
+version = "0.1.0"
+authors = ["eeff < 33566201+eeff@users.noreply.github.com>"]
+
+[sources]
+Bench = {path = "../Bench"}
+
+[compat]
+Test = "1.11.0"
+julia = "1.12"
+
+[extras]
+Bench = "517df1bc-ee24-4b58-84e4-955ff5db0486"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Bench", "Test"]

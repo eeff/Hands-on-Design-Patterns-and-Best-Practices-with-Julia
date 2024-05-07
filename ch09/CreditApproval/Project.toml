@@ -1,0 +1,14 @@
+name = "CreditApproval"
+uuid = "36ffa33e-48c8-4c8f-9193-da662d9770e2"
+authors = ["eeff < 33566201+eeff@users.noreply.github.com>"]
+version = "0.1.0"
+
+[deps]
+Mocking = "78c3b35d-d492-501b-9361-3d52fe80e533"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Mocking = "78c3b35d-d492-501b-9361-3d52fe80e533"
+
+[targets]
+test = ["Mocking", "Test"]
